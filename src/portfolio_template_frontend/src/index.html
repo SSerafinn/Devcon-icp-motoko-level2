@@ -2,465 +2,205 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Serafolio — Serafin Gazzingan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serafolio</title>
-    <!-- Font Awesome CDN -->
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
     <style>
-               /* General Styles */
-        body {
+        /* Reset & basics */
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('images/devcon_background.png');
-            background-repeat: no-repeat;
-            background-position: left;
-            background-size: cover;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;    
-            min-height: 100vh;      
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #0d0d0d;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
-        /* Make the content properly aligned */
-        .container {
+        /* Hero section */
+        .hero {
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: left;
-            justify-content: flex-start; 
-            max-height: 100vh; 
-            overflow-y: auto; 
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: left;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            letter-spacing: 2px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            color: #b0c4de;
+        }
+        .hero .cta-btn {
+            margin-top: 40px;
+            padding: 12px 30px;
+            border: 2px solid #00bfff;
+            border-radius: 30px;
+            color: #00bfff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .hero .cta-btn:hover {
+            background-color: #00bfff;
+            color: #0d0d0d;
         }
 
-
-        .profile-pic {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            background-color: lightgray;
-            background-size: cover;
-            background-position: left;
-            margin-bottom: 20px;
-            box-shadow: 0 0 15px 5px rgba(0, 191, 255, 0.7), 
-                        0 0 30px 10px rgba(0, 191, 255, 0.5);
-            transition: box-shadow 0.3s ease-in-out;
-            margin-top: 25px;
-        }
-
-        /* Header Layout */
-        .header {
+        /* Social links (fixed) */
+        .social-links {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
             display: flex;
-            align-items: left;
-            gap: 20px; 
-            flex-wrap: wrap;
-            justify-content: left; 
-        }
-
-        h1 {
-            font-size: 4em;
-            margin: 10px 0;
-        }
-
-        p {
-            font-size: 1.2em;
-            margin: 10px 0;
-        }
-
-        .links {
-            margin: 20px 0;
-            display: flex;
-            justify-content: left;
+            flex-direction: column;
             gap: 15px;
         }
-
-        .links a {
+        .social-links a {
             color: #00bfff;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.5em;
-            display: inline-flex;
-            align-items: left;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        .social-links a:hover {
+            transform: scale(1.2);
         }
 
-        .links a i {
-            font-size: 1.2em;
-            margin-right: 8px;
+        /* Projects grid */
+        .projects {
+            padding: 80px 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
         }
-
-        .links a:hover {
-            text-decoration: underline;
+        .project-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
-
-        .footer {
-            font-size: 0.9em;
-            color: #b0c4de;
-            margin-top: 40px;
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,191,255,0.3);
         }
-
-        /* Footer Logos */
-        .footer-logos {
-            display: flex;
-            justify-content: left;
-            gap: 30px;
-            margin-top: 20px;
+        .project-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
         }
-
-        .footer-logo {
-            width: 175px;
-            height: 175px;
-            object-fit: contain;
-        }
-
-        .footer a {
-            color: #00bfff;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-                text-align: center; 
-            }
-
-            .profile-pic {
-                width: 200px;
-                height: 200px;
-                margin-bottom: 10px;
-                margin-top: 25px;
-            }
-
-            .description {
-                font-size: 0.9em;
-                text-align: center; 
-            }
-
-            .links a {
-                font-size: 1.2em;
-                margin: 0 10px;
-            }
-
-            .footer-logo {
-                width: 100px;
-                height: 100px;
-            }
-
-            .footer-logos {
-                justify-content: center;
-                gap: 20px;
-            }
-
-            .footer {
-                font-size: 1em;
-                text-align: center; 
-            }
-
-            .container {
-                padding: 10px;
-            }
-
-            .header {
-                justify-content: center; 
-                text-align: center; 
-            }
-
-            .links {
-                display: flex;
-                justify-content: center; 
-                gap: 15px; 
-                margin: 20px 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2em;
-                text-align: center;
-            }
-
-            .profile-pic {
-                width: 150px;
-                height: 150px;
-                margin-bottom: 10px;
-            }
-
-            .description {
-                font-size: 1em;
-                text-align: center; 
-            }
-
-            .links a {
-                font-size: 1em;
-                margin: 0 8px;
-            }
-
-            .footer-logo {
-                width: 100px;
-                height: 100px;
-            }
-
-            .footer p {
-                margin: 0px;
-            }
-
-            .footer {
-                font-size: 0.8em;
-                text-align: center; 
-            }
-
-            .header {
-                justify-content: center; 
-                text-align: center; 
-            }
-
-            .links {
-                display: flex;
-                justify-content: center; 
-                gap: 10px; 
-                margin: 20px 0;
-            }
-        }
-
-        .landing-page {
-            display: flex;
-            flex-wrap: wrap; 
-            justify-content: center;
-            align-items: center; 
-            text-align: left;
-            margin: 100px auto;
+        .project-card .content {
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            max-width: 90%; 
-            width: 90%; 
-            max-width: 1000px;
         }
-
-
-        .landing-content {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
+        .project-card h3 {
+            margin-bottom: 10px;
         }
-
-        .landing-image img {
-            width: 200px;
-            height: 200px;
-            padding: 20px;
-            object-fit: contain;
-            border-radius: 50%;
-            box-shadow: 0 0 15px rgba(0, 191, 255, 0.7);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .landing-image img:hover {
-            transform: scale(1.1);
-        }
-
-        .landing-text {
-            max-width: 600px;
-        }
-
-
-        .landing-text h2 {
-            font-size: 2.5em;
-            color: #00bfff;
-            margin-bottom: 15px;
-        }
-
-        .landing-text li{
-            font-size: medium;
+        .project-card p {
             color: #b0c4de;
-            margin-bottom: 15px;
+            font-size: 0.95rem;
         }
 
-        .landing-text p {
-            font-size: 1.2em;
-            color: #b0c4de;
-            line-height: 1.6em;
-        }
-
-        @media (max-width: 768px) {
-            .landing-page {
-                flex-direction: column;
-                text-align: center;
-                padding: 15px; 
-            }
-
-            .landing-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .landing-image img {
-                width: 150px; 
-                height: 150px;
-                margin-bottom: 15px;
-            }
-
-            .landing-text h2 {
-                font-size: 1.8em; 
-                margin-bottom: 10px;
-            }
-
-            .landing-text p {
-                font-size: 1em; 
-                line-height: 1.4em;
-            }
-
-            .landing-text li {
-                font-size: 0.9em;
-            }
-
-            .learn-more-btn {
-                font-size: 1em;
-                padding: 8px 16px;
-                margin-top: 15px; 
-            }
-        }
-
-        @media (max-width: 480px) {
-            .landing-page {
-                padding: 10px;
-            }
-
-            .landing-image img {
-                width: 120px;
-                height: 120px;
-                margin-bottom: 10px;
-            }
-
-            .landing-text h2 {
-                font-size: 1.5em;
-                margin-bottom: 8px;
-            }
-
-            .landing-text p {
-                font-size: 0.9em;
-                line-height: 1.3em;
-            }
-
-            .landing-text li {
-                font-size: 0.8em;
-            }
-
-            .learn-more-btn {
-                font-size: 0.9em;
-                padding: 6px 12px;
-            }
-        }
-
-
-        .learn-more-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: transparent;
-            font-size: 1.2em;
-            font-weight: bold;
+        /* About section */
+        .about {
+            padding: 80px 40px;
+            max-width: 900px;
+            margin: 0 auto;
             text-align: center;
-            align-items: center;
-            text-decoration: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 191, 255, 0.5);
-            transition: all 0.3s ease-in-out;
-            border: white; 
-            color: white; 
+        }
+        .about h2 {
+            margin-bottom: 20px;
+            color: #00bfff;
+        }
+        .about p {
+            line-height: 1.6;
+            color: #b0c4de;
         }
 
-        .learn-more-btn:hover {
-            color: white; 
-            box-shadow: 0 6px 12px rgba(0, 139, 191, 0.7);
-            transform: translateY(-2px);
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #b0c4de;
         }
 
-        .learn-more-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 3px 6px rgba(0, 139, 191, 0.5);
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
         }
-      
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="profile-pic" style="background-image: url('images/profile-pic.png');"></div>
-        </div>
 
-        <!-- Updated Name and Description -->
-        <h1>Serafin Gazzingan</h1>
-        <p class="description">I am a UI/UX Developer passionate about crafting intuitive and delightful digital experiences.</p>
-        <h3>About Me:</h3>
-
-        <!-- Updated About Me Section -->
-        <div class="about-me">
-            <p>I specialize in designing user-centered interfaces that not only look beautiful but also function seamlessly. With experience across web and mobile platforms, I focus on turning complex problems into elegant solutions. I enjoy collaborating with developers, product teams, and stakeholders to bring impactful products to life.</p>
-            <h3>Key Highlights:</h3>
-            <ul>
-                <li>Experienced in Figma, Adobe XD, and Sketch for UI design</li>
-                <li>Skilled in user research, wireframing, prototyping, and usability testing</li>
-                <li>Strong background in front-end technologies (HTML, CSS, JavaScript)</li>
-                <li>Passionate about accessibility and design systems</li>
-            </ul>
-        </div>
-
-        <!-- Links -->
-        <div class="links">
-            <a href="https://www.linkedin.com/in/serafin-gazzingan/"><i class="fab fa-linkedin"></i>LinkedIn</a>
-            <a href="https://github.com/serafingazzingan"><i class="fab fa-github"></i>GitHub</a>
-            <a href="https://www.behance.net/serafingazzingan"><i class="fab fa-behance"></i>Behance</a>
-        </div>
-
-        <div class="visitor-count">
-            <p>Visitor count: </p>
-        </div>
-        
-        <!-- Footer Section -->
-        <div class="footer">
-            <p>Portfolio published during the Smart Contracts Code Camp by <span>DEVCON</span> and <span>ICP PH</span> at DEVCON Mindanao Codecamps, University of Science and Technology of Southern Philippines.<br><br>
-            ICP offers a groundbreaking platform for building smart contract projects using your existing expertise in ExpressJS, NextJS, and SQLite.<br>
-            This innovative approach leverages canister technology, a new paradigm for smart contracts, to empower developers to create next-generation<br>
-            applications. Explore the future of blockchain development with ICP. Visit <a href="https://islacamp.ph/">https://islacamp.ph/</a> to learn more!</p>
-
-            <!-- About ICP -->
-            <div class="landing-page">
-                <div class="landing-content">
-                    <div class="landing-image">
-                        <img src="images/icp-logo.png" alt="ICP Logo">
-                    </div>
-                    <div class="landing-text">
-                        <h2>About ICP</h2>
-                        <p><strong>Internet Computer (ICP)</strong><br>
-                            A blockchain-based protocol that aims to create a decentralized alternative to centralized internet cloud providers: 
-                        </p>
-                        <ul>
-                            <li>How it works: ICP is a network of independent data centers that can work together to create a decentralized internet. It uses smart contracts to replace most of the world's software. ICP's smart contracts are designed to be as powerful as traditional software.</li>
-                            <li>Features: ICP can interface with other smart contract blockchains and traditional Web 2 internet resources. It also allows developers to write contracts using popular languages like Rust, TypeScript, or Python.</li>
-                            <li>ICP token: The ICP token is used for governance, to reward network participants, and to pay fees for making transactions.</li>
-                        </ul>
-                        <a href="https://internetcomputer.org/" class="learn-more-btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-logos">
-                <img src="images/devcon-logo.png" alt="DEVCON Logo" class="footer-logo">
-                <img src="images/icp-logo.png" alt="ICP Logo" class="footer-logo">
-            </div>
-        </div>
+    <!-- Social Links -->
+    <div class="social-links">
+        <a href="https://www.linkedin.com/in/serafin-gazzingan/"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/serafingazzingan"><i class="fab fa-github"></i></a>
+        <a href="https://www.behance.net/serafingazzingan"><i class="fab fa-behance"></i></a>
     </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Serafin Gazzingan</h1>
+        <p>UI/UX Developer crafting intuitive and stunning digital experiences.</p>
+        <a href="#projects" class="cta-btn">View Projects</a>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="project-card">
+            <img src="images/project1.jpg" alt="TravelMate App">
+            <div class="content">
+                <h3>TravelMate App</h3>
+                <p>A mobile app helping travelers create personalized itineraries with smooth, elegant UI.</p>
+            </div>
+        </div>
+        <div class="project-card">
+            <img src="images/project2.jpg" alt="Finance Dashboard">
+            <div class="content">
+                <h3>Finance Dashboard</h3>
+                <p>Data-rich dashboard for a fintech startup, focusing on clarity and seamless interactions.</p>
+            </div>
+        </div>
+        <div class="project-card">
+            <img src="images/project3.jpg" alt="Healthcare Portal">
+            <div class="content">
+                <h3>Healthcare Portal</h3>
+                <p>Accessible, patient-centered portal for managing appointments and health records.</p>
+            </div>
+        </div>
+        <div class="project-card">
+            <img src="images/project4.jpg" alt="E-commerce Redesign">
+            <div class="content">
+                <h3>E-commerce Redesign</h3>
+                <p>UX overhaul that boosted conversions and improved the mobile shopping journey.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <h2>About Me</h2>
+        <p>I specialize in designing user-centered interfaces that not only look beautiful but also work seamlessly. Passionate about solving problems creatively, I bring ideas to life through thoughtful design and meticulous detail. Experienced with Figma, Adobe XD, Sketch, and front-end tech — I believe design is more than just aesthetics; it’s about building experiences that resonate with people.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Serafin Gazzingan. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
